@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+</head>
+
+
+
+<body>
+
+<div class="container straighten">
+	<div id="popup">
+        <div class="marker" id="lighting"></div>
+        <div class="marker" id="cameras"></div>
+        <div class="marker" id="desk"></div>
+        <div class="marker" id="teleprompter"></div>
+        <div class="marker" id="greenscreen"></div>
+        <img src="https://www.ecok.edu/sites/default/files/siteContent/administration/academic-affairs-programs/academics/colleges-schools/liberal-arts-social-sciences/fine-arts/mass-communication/images/TVstudio1.jpg">
+       </div><!--popup-->
+</div>
+
+
+<style>
+.container{
+    width: 60%;
+    display: inline-block;
+    position: relative;
+}
+
+.textbox {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 1.5em;
+}
+.container img {    
+    width: 100%;
+}
+
+
+#popup {
+	position: relative;
+}
+.hoverbox{
+	position: absolute;
+	padding:0.5em;
+	background-color: #fff;
+	box-shadow: 3px 3px 8px rgba(0,0,0,0, 4);
+	z-index:300;
+	font-family:'Roboto', Arial, sans-serif;
+	line-height: 1.3em;
+	min-width:100px;
+	max-width:200px;
+
+}
+
+#lighting {
+    top:20%;
+    left: 50%;
+}
+#cameras {
+    top:58%;
+    left: 43%;
+	
+}
+#greenscreen {
+    top: 40%;
+    left: 70%;
+}
+#desk {
+    top:70%;
+    left: 30%;
+}
+
+#teleprompter {
+    top:60%;
+    left: 40%;
+}
+.straighten:after {
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+	
+.popuptitle {
+    color: #C72428;
+    font-family:'Roboto', Arial, sans-serif;
+    letter-spacing: 0.01em;
+    font-size:18px; 
+    font-weight:700;
+    clear:both;
+}
+
+.marker{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+.marker:hover {
+    background-color: orange;
+}
+
+}
+@media screen and (max-width: 900px) {
+.container{
+    width: 90%
+}
+.textbox{
+    width: 90%
+}
+}
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+}
+@media only screen and (min-width: 768px) {
+    /* For tablets: */
+    .col-m-1 {width: 8.33%;}
+    .col-m-2 {width: 16.66%;}
+    .col-m-3 {width: 25%;}
+    .col-m-4 {width: 33.33%;}
+    .col-m-5 {width: 41.66%;}
+    .col-m-6 {width: 50%;}
+    .col-m-7 {width: 58.33%;}
+    .col-m-8 {width: 66.66%;}
+    .col-m-9 {width: 75%;}
+    .col-m-10 {width: 83.33%;}
+    .col-m-11 {width: 91.66%;}
+    .col-m-12 {width: 100%;}
+}
+</style>
+
+
+
+<div class="textbox">
+    <div class="popuptitle">Television Studio</div>
+    This is behind the scenes of how shows are created. <br /> <br />Click on a marker to learn about each equipment location.
+</div>
+<script>
+$(document).ready(function() {
+
+var data = 
+[["lighting","Lighting", "lighting, is the way that the anchors or correspondents sitting on the desk can be seen easily on air. Each light is positioned in a different direction to cater to different shots in the studio."],
+["cameras","Cameras", "The camera is the device that records the footage so the viewers can see what is going on. This can be either live or taped. The cameras rotate around the room robotically."],
+["greenscreen","Green Screen", "The green screen is used as a backdrop for graphics such as highways for the traffic reporter to point to and weather stats for the weather reporter. This is done in the production and control room."],
+["desk","Desk", "The desk is where the talent sit at while they read the teleprompter for news or adlib during their broadcast."],
+["teleprompter","Teleprompter", "The teleprompter shows the script of the show to make it easier for the talent to read it. Usually the words are printed in large text. As one reads, it slowly moves in parallel."]];
+
+
+$(".marker").click(function(){
+    $('.textbox').empty();
+    for (var i=0; i<data.length; i++) {
+    if (this.id == data[i][0]) {
+        $(".textbox").append('<div class="popuptitle">'+data[i][1]+'</div>' + data[i][2]);
+    } 
+    } 
+});
+
+var pos, thex, they;
+
+$('.marker').mouseover(function(e) {
+	pos = $('#popup').offset()
+	thex = event.pageX - pos.left + 10;
+	they = event.pageY - pos.top + 0;
+	if (thex > $('#popup').width() - 150) { thex = $('#popup').width() - 150};
+	if (they > $('#popup').height() - 100) { they = $('#popup').height() - 100};
+	
+	
+	for (var i=0; i<data.length; i++) {
+    if (this.id == data[i][0]) {
+        $("#popup").append('<div class="hoverbox" style="top:'+they+'px; left:'+thex+'px;"><div class="popuptitle">'+data[i][1]+'</div></div>'); 
+    } 
+    } 
+});//mouseover
+
+$('.marker').mouseout(function() {
+	$('.hoverbox').remove();
+});
+
+});//doc ready
+</script>
+
+</body>
+</html>
